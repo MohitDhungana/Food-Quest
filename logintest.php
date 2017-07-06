@@ -23,6 +23,8 @@
 			{
 				if($row["User_Name"]==$user && $row["Password"] ==$pwd)
 					$flag =1;
+				
+					
 	
 			}
 	
@@ -30,9 +32,10 @@
 		{
 			//echo"<br> You are logged in";
 			session_start();
-			$_SESSION["user"]=$fname;
-			$_SESSION["userid"]=$userid;
-			echo "<script>window.location = '../../suraj/memberpage.html'</script>";
+			//$_SESSION["user"]=$user;
+			//$_SESSION["userid"]=$pwd;
+			echo "<script>window.location = 'memberpage.php'</script>";
+			echo"Already scripted";
 		}
 		else
 		{

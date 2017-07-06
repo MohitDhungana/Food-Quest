@@ -24,7 +24,7 @@
 <div class="container">
 <div class="row" style="height:150px;">
 <h1 style="text-align:center;font-size:70px;font-family:Segoe Script">Food Quest</h1>
-<h2 style="text-align:center;font-family:Gabriola;">Compare any dishes you prefer</h2>
+<h2 style="text-align:center;font-family:Gabriola;">find the best food for you...</h2>
 </div>
 <form>
     <div class="form-group">
