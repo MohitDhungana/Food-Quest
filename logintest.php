@@ -37,6 +37,7 @@
 			echo "<script>window.location = 'memberpage.php'</script>";
 			echo"Already scripted";
 		}
+		
 		else
 		{
 			echo "Invalid Username or password.";
