@@ -1,0 +1,31 @@
+.row1
+{
+	background-image:url("jumb.jpeg");
+	background-size:cover;
+	height:300px;
+	width:100%;
+	width: auto !important;
+}
+#hover:hover
+{
+	color:#45c5d1;
+	font-size:15px;
+	background:#e6e8ed;
+}
+.jcarousel img {
+    display: block;
+    max-width: 100%;
+    height: auto !important;
+}
+body { max-width: 100%; overflow-x: hidden; }
+
+
+
+
+
+
+
+
+
+
+
