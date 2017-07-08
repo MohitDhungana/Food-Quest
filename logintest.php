@@ -1,6 +1,5 @@
 <?php
-	
-	echo"<br>  inside logintest.php";
+
 	$user=$_POST['login_username'];
 	$pwd=$_POST['login_password'];
 	
@@ -15,29 +14,29 @@
 		$dbpwd="";
 		
 		$conn = new mysqli("127.0.0.1","root","","food quest");
-		$sql = "SELECT User_Name,Password FROM consumer";
+		$sql = "SELECT User_Name,Password,First_Name,Last_Name,User_Id FROM consumer";
 		$result = $conn->query($sql);
 		$flag=0;
 	
 			while($row = $result->fetch_assoc())
 			{
-				if($row["User_Name"]==$user && $row["Password"] ==$pwd)
+				if($row["User_Name"]==$user && $row["Password"] ==$pwd){
+					
+					//$fnanme = $row["First_Name"];
+				//	$id = $row["User_Id"];
 					$flag =1;
-				
+				}
 					
 	
 			}
 	
-		if($flag==1)
+		if($dbpwd==$pwd &&  $pwd==$dbpwd)
 		{
-			//echo"<br> You are logged in";
 			session_start();
-			//$_SESSION["user"]=$user;
-			//$_SESSION["userid"]=$pwd;
-			echo "<script>window.location = 'memberpage.php'</script>";
-			echo"Already scripted";
+			//$_SESSION["user"]=$fname;
+			//$_SESSION["userid"]=$userid;
+			echo "<script>window.location = 'login.php'</script>";
 		}
-		
 		else
 		{
 			echo "Invalid Username or password.";

@@ -1,0 +1,161 @@
+
+<?php
+
+	$user=$_POST['login_username'];
+	$pwd=$_POST['login_password'];
+	
+	if($user=="" || $pwd=="")
+	{
+		echo "Enter the Valid username and Password.";
+		
+	}
+	
+	else{
+		
+		$dbpwd="";
+		
+		$conn = new mysqli("127.0.0.1","root","","food quest");
+		$sql = "SELECT User_Name,Password,First_Name,Last_Name,User_Id FROM consumer";
+		$result = $conn->query($sql);
+		$flag=0;
+	
+			while($row = $result->fetch_assoc())
+			{
+				if($row["User_Name"]==$user && $row["Password"] ==$pwd){
+					
+					//$fnanme = $row["First_Name"];
+				//	$id = $row["User_Id"];
+					$flag =1;
+				}
+					
+	
+			}
+	
+		if($dbpwd==$pwd &&  $pwd==$dbpwd)
+		{
+			session_start();
+			//$_SESSION["user"]=$fname;
+			//$_SESSION["userid"]=$userid;
+			echo "<script>window.location = 'login.php'</script>";
+		}
+		else
+		{
+			echo "Invalid Username or password.";
+		}
+		
+	$conn->close();	
+}
+	
+	
+	
+?>
+
+<html lang="en">
+<head>
+  <title>Register</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <style>
+		label{color:teal;font-family:Gabriola;font-size:20px;}
+  </style>
+</head>
+
+	<nav class="navbar navbar-default" style="opacity:0.7">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="home.html">Home</a></li>
+				<li><a href="aboutus.html">About US</a></li>
+			</ul>	
+			<ul class="nav navbar-nav navbar-right">
+			<li><a href="register.html"><span class="glyphicon glyphicon-user"></span>Login or Register</a></li>
+			</ul>
+		</div>
+  </nav>
+	<body style="background-image:url(images/background.jpg);background-size:cover;background-width:100%;background-repeat:no-repeat"  class="img-responsive">
+		<div class="container">
+			<h1 style="color:blue;text-align:center;margin-top:30px;font-family:Gabriola">Start Exploring Our features</h1>
+			<div class="row" style="margin-top:50px;">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6" style="background-color:black;opacity:0.8;border-radius:8px">
+					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" style="float:right;margin-top:10px;" name="signup">Sign Up </button><br><br>
+					<form action="logintest.php" method = "POST">
+						<div class="form-group">
+							<label>Username :</label>
+							<input type="text" class="form-control"name="login_username" placeholder="Enter Your Username">
+						</div>
+						<div class="form-group">
+							<label>Password:</label>
+							<input type="Password" class="form-control"name="login_password" placeholder="Enter Your Password">
+						</div>
+						<div class="form-group">
+							<button class="btn btn-success"name="login">Log in</button>
+						</div>
+					</form>
+				</div>	      
+						  <!-- Modal -->
+							<div class="modal fade" id="myModal" role="dialog">
+								<div class="modal-dialog modal-lg">
+						  
+						  <!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right" name="cancel">Cancel</button>
+									<h1 class="modal-title"style="text-align:center;font-family:Gabriola;">You can register Here</h1>
+								</div>
+								<div class="modal-body">
+								<form action="">
+									<div class="form-group">
+									<label>User Type :</label> <br>
+										  <div class="radio-inline">
+												<label><input type="radio" name="optradio">Member Or</label>
+											</div>
+											<div class="radio-inline">
+												<label><input type="radio" name="optradio">User</label>
+											</div>
+									</div>
+									<div class="form-group">
+										<label>First Name :</label>	
+										<input type="text" class="form-control" name="fname" placeholder="Enter First Name">
+									</div>
+									<div class="form-group">
+										<label>Last Name :</label>
+												<input type="text" class="form-control" name="lname" placeholder="Enter last name">
+									</div>
+									<div class="form-group">
+										<label>Username :</label>
+												<input type="text" class="form-control" name="" placeholder="Enter user name">
+									</div>
+									<div class="form-group">
+										<label>Email :</label>
+												<input type="text" class="form-control" name="" placeholder="Enter your Email">
+									</div>
+									<div class="form-group">
+									<label>Phone Number :</label>
+												<input type="text" class="form-control" name="" placeholder="Enter Phone Number">
+									</div>
+									<div class="form-group">
+									<label>Password :</label>
+												<input type="password" class="form-control" name="" placeholder="New Password">
+									</div>
+									<div class="form-group">
+									<label>Retype Password :</label>
+												<input type="text" class="form-control" name="" placeholder="Retype password">
+									</div>
+									<div class="form-group">
+									<button type="submit" class="btn btn-success" name="createaccount">Create Account</button>
+									</div>
+									
+									
+								</div>
+							</div>
+								</div>
+							</div>
+				
+				<div class="col-sm-3"></div>
+				
+			</div>
+		</div>
+	</body>

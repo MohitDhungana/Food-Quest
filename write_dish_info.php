@@ -1,5 +1,12 @@
 <?php
-	$dbc = mysqli_connect('127.0.0.1','root',null,'food quest')
+  
+	   session_start();
+    $user_id=$_SESSION['loggedIn_userId'];
+    //echo "It is to be uploaded in id=:".$user_id;
+
+
+
+  $dbc = mysqli_connect('127.0.0.1','root',null,'food quest')
 		or die('Error connecting to MySQL server');
 	
 	//$query = "INSERT INTO email_contents(Id,User Name)".
@@ -8,6 +15,7 @@
   $dish_price= $_POST['dishprice'];
   $dish_description = $_POST['description'];
   $dish_image_location = "images/";
+  $uploaded_by = $user_id;
   
   
   
@@ -46,14 +54,15 @@
   
 
 
-	$query1 = "INSERT INTO `food quest`.`food` (`Food_Name`, `Food_Price`, `Food_Description`,`Food_Image`)".
-	" VALUES ('$dish_name','$dish_price','$dish_description','$dish_image_location')";
+	$query1 = "INSERT INTO `food quest`.`food` (`Food_Name`, `Food_Price`, `Food_Description`,`Food_Image`,`uploaded_by`)".
+	" VALUES ('$dish_name','$dish_price','$dish_description','$dish_image_location','$user_id')";
 	
 	//$query1 = "INSERT INTO `alien_database`.`abduction` (`First Name`, `Last Name`, `Email`, `When it Happpened`, `How long`, `How many`, `Description`, `Fang Spotted?`, `Other`)".
 	//"  VALUES ('$first_name','$last_name','$email','$when_it_happened','$how_long', '$how_many', '$alien_description', '$fang_spotted','$other')";
 	$result = mysqli_query($dbc, $query1)
 		or die('Error querying database');
-	echo('Succeded');
+	//echo('Succeded');
 	mysqli_close($dbc);
+  header('location:memberpage.php');
 	
 ?>
