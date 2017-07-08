@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Radio Button</title>
+</head>
+<script src="jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+		
+		
+		$("#user").click(function(){
+		if($('#user').is(':checked')){
+			$("#div_user").show();
+		}
+		
+			$("#div_member").hide();
+		
+		});
+		
+		$("#member").click(function(){
+		if($('#member').is(':checked')){
+			$("#div_member").show();
+		}
+			$("#div_user").hide();
+		});
+
+});
+
+</script>
+<body>
+
+<form>
+  <input type="radio" name="gender" value="male" id="user"> User<br>
+  <input type="radio" name="gender" value="female" id="member"> Member<br>
+</form>
+
+<div id="div_user" style="display:none">
+User Name: <input type="text"/>
+</div>
+
+<div id="div_member" style="display:none">
+Member Name: <input type="text"/>
+</div>
+
+</body>
+</html>
