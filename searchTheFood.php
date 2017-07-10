@@ -77,7 +77,7 @@ if(isset($_POST['searchBar'])){
 
                   $tempSize--;
                 }
-                                    echo "<br><br>";
+                                 //   echo "<br><br>";
 
                 //$file_location = $row["Food_Image"];
           //    echo readfile("$file_location");
@@ -89,7 +89,7 @@ if(isset($_POST['searchBar'])){
               
               // echo $disItem;
           }
-          // echo"<br><br>....... Total dishes found is:".$totalFoundNumber;
+           //echo"Total dishes found is:".$totalFoundNumber;
 
     }else{
       Header('location:home.php');
@@ -130,6 +130,10 @@ if(isset($_POST['searchBar'])){
     </ul>
   </div>
   </nav>
+
+  <div>
+      <strong>Total Number of Dishes found is: <?=$totalFoundNumber;?></strong>
+    </div>
 
  		<div class="container-fluid">
             

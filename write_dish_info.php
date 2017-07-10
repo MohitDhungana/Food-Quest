@@ -68,7 +68,7 @@
       if(empty($errors)==true){
 		  
 		  $dish_image_location=$dish_image_location.$dish_name.$uploadedTime.".jpg";
-         move_uploaded_file($file_tmp,"images/".$dish_name.$uploadedTime.".jpg");
+         move_uploaded_file($file_tmp,$dish_image_location);
          echo "Image uploading Success";
 		 //echo "the image is stored at:'images/$file_name'";
       }else{
