@@ -59,7 +59,7 @@
 							<img src="images/momo.jpg" alt="momo" style="height:370px;width:100%;">
 							<div class="carousel-caption">
 								<h2>Buff Fried C MOMO</h2>
-								<h3>Hotel Bajra and Bar</h3>
+								<h3>@Hotel Bajra and Bar</h3>
 								<button type="button" class="btn btn-info">Know More</button>
 							</div>
 						</div>
@@ -68,7 +68,7 @@
 							<img src="images/pizza.jpg" alt="pizza" style="height:370px;width:100%;">
 							<div class="carousel-caption">
 								<h2>Chicken Cheese Pizza</h2>
-								<h3>Delecious Pizza Hut</h3>
+								<h3>@delecious Pizza Hut</h3>
 								<button type="button" class="btn btn-info">Know More</button>
 							</div>
 						</div>
@@ -76,8 +76,8 @@
 						<div class="item">
 							<img src="images/italian.jpg" alt="lassi" style="height:370px;width:100%;">
 							<div class="carousel-caption">
-								<h2>Chicken Curry</h2>
-								<h3>Hotel Godwari And Lounge</h3>
+								<h2>Grilled Smoked Pork</h2>
+								<h3>@hotel Godawari And Lounge</h3>
 								<button type="button" class="btn btn-info">Know More</button>
 							</div>
 						</div>

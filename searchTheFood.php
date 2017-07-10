@@ -4,9 +4,16 @@ if(isset($_POST['searchBar'])){
 	include'DBconnect/connect.php';
 	//echo".";
 
-	$empty=0;
+	$empty=1;
 	$toSearch= $_POST["searchBar"];
-	$queryFood = "SELECT * FROM food WHERE Food_Name='$toSearch'";
+  $toSearch=strtolower($toSearch);
+  $brokenString = explode(" ",$toSearch);
+  $size = sizeof($brokenString);
+  // echo"<br>total words in ".$toSearch." is:".$size."<br>";
+
+  
+	 $queryFood = "SELECT * FROM food";
+  
 	
 	
 
@@ -33,27 +40,57 @@ if(isset($_POST['searchBar'])){
           $numberOfItemsStored = 0;
 
           if ( ($result->num_rows) > 0) {
+              $totalFoundNumber=0;
+              $empty=0;
               while($row = $result->fetch_assoc()) {
+                // echo"Seaching if matched with:";
                 $Name = $row["Food_Name"];
-                $Description =$row["Food_Description"];
-                $Image = $row["Food_Image"];
-                $Rating = $row["Food_Rating"];
-                $Price = $row["Food_Price"];
+                // echo $Name."<br>";
+                
 // 
                  // echo "Dish Name=" . $row["Food_Name"]. " <br> Description=: " . $row["Food_Description"]."<br><br><br>";
-                
-                  $disharray[$numberOfItemsStored] = new Dish($Name, $Image, $Rating, $Price);
-                  $numberOfItemsStored++;
+                // echo"The size of the search string is:".$size;
+                $tempSize=$size;
+                while($tempSize>0){
+                  $part=$brokenString[$tempSize-1];
+                  //echo"Seaching if ".$part." matched with:   ";
+                  $loweredName =strtolower($Name);
+                  //echo $loweredName."<br>";
 
-                $file_location = $row["Food_Image"];
+                  if( strpos($loweredName,$part)>-1  ){
+                      //echo "<br>".$part." has been found in ".$loweredName."<br>";
+                      $Description =$row["Food_Description"];
+                      $Image = $row["Food_Image"];
+                        $Rating = $row["Food_Rating"];
+                        $Price = $row["Food_Price"];
+
+                        $totalFoundNumber++;
+                
+                    $disharray[$numberOfItemsStored] = new Dish($Name, $Image, $Rating, $Price);
+                    $numberOfItemsStored++;
+                    break;
+                    }else{
+                     // echo"............".$part." is absent in ".$loweredName."<br>";
+
+                    }
+
+
+                  $tempSize--;
+                }
+                                    echo "<br><br>";
+
+                //$file_location = $row["Food_Image"];
           //    echo readfile("$file_location");
               }
           } else {
               //echo "<br><br><br>0 results";
               $disItem = "There are no items yet...";
+              $empty=1;
               
-              //echo $disItem;
+              // echo $disItem;
           }
+          // echo"<br><br>....... Total dishes found is:".$totalFoundNumber;
+
     }else{
       Header('location:home.php');
     }
@@ -146,9 +183,10 @@ if(isset($_POST['searchBar'])){
             { 
             ?>
 
-            <strong> Your dish list is empty.... You can add by clicking the Green Button below</strong>
+            <strong> Oops...Couldn't find any '<?php echo $toSearch."'"?>.<br> </strong>
             <br>
             <img src="images/empty.jpg" style="height:450px;width:450px;position:center">
+            <strong><br>please try with some other words for <?php echo "'".$toSearch."'"?></strong>
 
               <?php
             }
