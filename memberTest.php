@@ -36,17 +36,36 @@
 
             } $disharray=array(50);
 
+//
+        //       echo"<br><br>testing which button is selected<br><br>";
+
+    if($_POST){
+            echo"<br> something has been posted";
+     if(isset($_POST['buttonEdit'])){
+        insert();
+      }elseif(isset($_POST['buttonDelete'])){
+        select();
+      }else{
+        echo(" No button is pressed yet");
+      }
+    }else{
+        echo"Nothing has been posted";
+    }
+  
+
+
+ 
+    function select()
+    {
+       echo "The select function is called.";
+    }
+    function insert()
+    {
+       echo "The insert function is called.";
+    }
+
+
             //IF BUTTON IS PRESSED
-
-
-// function testfun()
-// {
-//    echo "Your test function on button click is working";
-// }
-// if(array_key_exists('buttonEdit',$_POST)){
-//    testfun();
-// }
-
 
 // if (isset($_POST['action'])) {
 //     switch ($_POST['action']) {
@@ -67,7 +86,7 @@
             //get the no. of dishes form database.
             //$login_id=$_GET["id"];
             session_start();
-           // $user_id=39;
+            // $user_id=39;
             $user_id=$_SESSION['loggedIn_userId'];
            // echo $user_id;
 
@@ -125,7 +144,7 @@
              <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
               // <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
               <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-              <script src="showdata.js"></script>
+              <script src="showdata1.js"></script>
               <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
               <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
               <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
@@ -156,7 +175,7 @@
             </div>
             </nav>
           <div class="container-fluid">
-            <div class="jumbotron"style="background-color:#ccb98c;height:75%;overflow-y:scroll;border-left-style:solid;border-bottom-style:solid;border-width:15px;">
+            <div class="jumbotron"style="background-color:#ccb98c;height:80%;overflow-y:scroll;border-left-style:solid;border-bottom-style:solid;border-width:15px;">
               <!-- <img src="<?php echo $file_location?>" style="height:300px;width:300px;"> -->
               
               <?php $itemRemaining=$numberOfItemsStored;
@@ -179,9 +198,9 @@
                     </div>
                       <hr>
                        <!-- &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp -->
-                      <button type="button" class="btn btn-warning" style="float:left;margin-left:110px"onclick="edit()" name="buttonEdit" id="buttonEdit">&nbsp&nbspEdit&nbsp&nbsp</button>
+                      <button type="button" class="btn btn-warning" style="float:left;margin-left:110px"onclick="edit()" onclick="detailsmodal(<?=[$itemRemaining-1]?>)"&nbsp&nbspEdit&nbsp&nbsp</button>
                       <!-- &nbsp&nbsp&nbsp&nbsp -->
-                      <button type="button" class="btn btn-danger"style="float:right;margin-right:90px"onclick="delete()" name="buttonDelete" id="buttonDelete">Delete</button>
+                      <button type="button" class="btn btn-danger"style="float:right;margin-right:90px"onclick="delete()">Delete</button>
 
                         
 
@@ -207,6 +226,25 @@
               if($empty==1)
             { 
             ?>
+
+            <script>
+  function detailsmodal(id)
+  {
+    var data = {"id":id};
+    jQuery.ajax({
+      url: '/project/includes/detailsmodal.php',
+      method: "post",
+      data: data,
+      success: function(data){
+        jQuery('body').append(data);
+        jQuery('#details-modal').modal('toggle');
+      },
+      error: function(){
+        alert("Something went wrong.");
+      }
+    });
+  }
+</script>
             <strong> Your dish list is empty.... You can add by clicking the Green Button below</strong>
             <br>
             <img src="images/empty.jpg" style="height:450px;width:450px;position:center">
@@ -216,6 +254,40 @@
             ?>
              
             </div>
+            <form method= "POST">
+              <button type="button" class="btn btn-warning" style="float:left;margin-left:110px" value="buttonEdit" name="buttonEdit">&nbsp&nbspEdit-Test&nbsp&nbsp</button>
+              <button type="button" class="btn btn-danger"style="float:right;margin-right:90px"value="buttonDelete" name="buttonDelete">Delete-Test</button>
+              <?php
+
+    
+    //echo"<br><br>inside main if block<br><br>";
+    if($_POST){
+        echo"<br> Something has been posted";
+    if(isset($_POST['buttonEdit'])){
+        edit();
+    }elseif(isset($_POST['buttonDelete'])){
+        delete();
+    }
+}
+
+ 
+    function edit()
+    {
+       echo "Trying to delete";
+    }
+    function delete()
+    {
+       echo "Trying to read ";
+    }
+ 
+?>
+              </form>
+
+             
+
+
+           
+
             <div class="text-center">
               <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">click to add dishes</button>
             </div>
@@ -268,7 +340,10 @@
                 </div>
                 
               </div>
+
             </div>
+
+            
 
 
 

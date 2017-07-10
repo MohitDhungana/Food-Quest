@@ -11,4 +11,12 @@ function showdata(){
 	}
 
 }
+function edit11()
+{
+<?php echo"editing the data";?>
+}
+function delete11()
+{
+	document.write("delete block");
+}
 

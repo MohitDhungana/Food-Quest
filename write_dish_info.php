@@ -16,11 +16,37 @@
   $dish_description = $_POST['description'];
   $dish_image_location = "images/";
   $uploaded_by = $user_id;
-  
-  
-  
-  //$dish_description = "The best in china";
-  
+  // $time = intval(microtime(true));
+  //$time=strtotime(2017-07-10 14:28:53);
+
+
+
+  //write into database
+  $queryInsert = "INSERT INTO `food quest`.`food` (`Food_Name`, `Food_Price`, `Food_Description`,`Uploaded_by`)".
+  " VALUES ('$dish_name','$dish_price','$dish_description','$user_id')";
+  $resultInsert = mysqli_query($dbc, $queryInsert)
+    or die('Error querying Insert database');
+
+  //Get the Food-Id of the stored food;
+  $queryRead ="SELECT Uploaded_Time FROM food WHERE Uploaded_By='$user_id'";
+  $resultRead= mysqli_query($dbc, $queryRead)
+    or die('Error querying Read database');
+
+   if ( ($resultRead->num_rows) > 0) {
+          $uploadedTime=0;
+          
+              while($row = $resultRead->fetch_assoc()) {
+                if ($uploadedTime< strtotime($row['Uploaded_Time'])) {
+                  $sqlTime =$row['Uploaded_Time'];
+                  $uploadedTime=strtotime($row['Uploaded_Time']);
+                }
+
+
+              } 
+          }
+  //  $food_id=
+
+
    if(isset($_FILES['image'])){
       $errors= array();
       $file_name = $_FILES['image']['name'];
@@ -41,26 +67,19 @@
       
       if(empty($errors)==true){
 		  
-		  $dish_image_location=$dish_image_location.$dish_name.".jpg";
-         move_uploaded_file($file_tmp,"images/".$dish_name.".jpg");
+		  $dish_image_location=$dish_image_location.$dish_name.$uploadedTime.".jpg";
+         move_uploaded_file($file_tmp,"images/".$dish_name.$uploadedTime.".jpg");
          echo "Image uploading Success";
-		 echo "the image is stored at:'images/$file_name'";
+		 //echo "the image is stored at:'images/$file_name'";
       }else{
          print_r($errors);
       }
    }
 
-  
-  
+   $queryUpdate = "UPDATE food SET Food_Image='$dish_image_location' WHERE Uploaded_Time='$sqlTime'";
+   $resultRead= mysqli_query($dbc, $queryUpdate)
+    or die('Error querying Update database');
 
-
-	$query1 = "INSERT INTO `food quest`.`food` (`Food_Name`, `Food_Price`, `Food_Description`,`Food_Image`,`uploaded_by`)".
-	" VALUES ('$dish_name','$dish_price','$dish_description','$dish_image_location','$user_id')";
-	
-	//$query1 = "INSERT INTO `alien_database`.`abduction` (`First Name`, `Last Name`, `Email`, `When it Happpened`, `How long`, `How many`, `Description`, `Fang Spotted?`, `Other`)".
-	//"  VALUES ('$first_name','$last_name','$email','$when_it_happened','$how_long', '$how_many', '$alien_description', '$fang_spotted','$other')";
-	$result = mysqli_query($dbc, $query1)
-		or die('Error querying database');
 	//echo('Succeded');
 	mysqli_close($dbc);
   header('location:memberpage.php');

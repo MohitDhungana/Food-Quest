@@ -27,19 +27,21 @@
 <h1 style="text-align:center;font-size:70px;font-family:Segoe Script">Food Quest</h1>
 <h2 style="text-align:center;font-family:Gabriola;">Compare any dishes you prefer</h2>
 </div>
-<form>
+<form action="searchTheFood.php" method="POST">
     <div class="form-group">
 		<div class="row">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8">
-				<input type="text" class="form-control" id="search" value="search your dish here">
+				<input type="text" class="form-control" name="searchBar" placeholder="search your dish here">
 			</div>
 			<div class="col-sm-2">
-				<button type="button" class="btn btn-default" onclick="showdata()">
-					<span class="glyphicon glyphicon-search"></span> Search
+				<button type="submit" class="btn btn-success">Search
+					<span class="glyphicon glyphicon-search"></span></button>
 				</button>
 			</div>
 		</div>
+	</div>
+</form>
 		<div class="row" style="height:370px;margin-top:20px;">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8">
